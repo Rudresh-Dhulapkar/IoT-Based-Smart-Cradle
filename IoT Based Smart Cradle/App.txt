@@ -1,0 +1,43 @@
+#include <ESP8266WiFi.h>
+
+#include <FirebaseArduino.h>
+
+#define FIREBASE_HOST “https://smart-cradle-2f370-default-rtdb.firebaseio.com/”
+
+#define FIREBASE_AUTH “xXrlhuz5rlSdCF4hwv6Bw8bfveyQIBh5X3V9z8iG”
+
+#define WIFI_SSID “Rudresh”
+
+#define WIFI_PASSWORD “Rudresh203”
+
+int moistureSensor = A0;
+
+void setup() {
+Serial.begin(9600);
+WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+Serial.print(“connecting”);
+while (WiFi.status() != WL_CONNECTED) {
+Serial.print(“.”);
+delay(1000);
+}
+
+Serial.println(“”);
+Serial.print(“connected: “);
+Serial.println(WiFi.localIP());
+
+Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+delay(1000);
+
+pinMode(moistureSensor,INPUT);
+// connect to wifi.
+
+}
+
+void loop()
+{
+int moi = analogRead(moistureSensor);
+
+Firebase.setInt(“data1”,moi);
+Serial.println(moi);
+delay(1000);
+}

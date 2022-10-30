@@ -1,0 +1,44 @@
+#include <Servo.h> 
+
+const int soundpin=A0;
+const int threshold=47;
+Servo myservo;                  
+int pos = 50;
+
+void setup(){
+  Serial.begin(9600);
+  pinMode(soundpin,INPUT);
+  myservo.attach(9);
+}
+
+void servo() 
+{ 
+  for(pos = 50; pos <= 120; pos += 1) 
+  {                                  
+    myservo.write(pos);      
+    delay(15);                    
+  } 
+  for(pos = 120; pos>=50; pos-=1)     
+  {                                
+    myservo.write(pos);              
+    delay(15);                     
+  } 
+} 
+void loop(){
+  int soundsens=analogRead(soundpin);
+
+  int s = soundsens;
+
+  Serial.println(s);
+  delay(1000);
+
+  
+  if (soundsens>=threshold){
+    servo();
+    delay(1000);
+  }
+  else{
+  Serial.println("Normal");
+ }
+}
+
