@@ -1,0 +1,23 @@
+int msensor = 4;
+boolean flag = false;
+
+void setup(){
+  Serial.begin(9600);
+  pinMode(msensor,INPUT);
+}
+void loop(){
+  if((digitalRead(msensor) == HIGH)&& (flag == false))
+  {
+    Serial.println("DRY");
+    flag = true;
+    delay(1000);
+  }
+  if((digitalRead(msensor) == LOW)&& (flag == true))
+  {
+    Serial.println("WET");
+    flag = true;
+    delay(1000);
+  }
+
+  delay(1000);
+}

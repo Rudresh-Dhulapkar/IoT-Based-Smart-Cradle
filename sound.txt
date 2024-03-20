@@ -1,0 +1,26 @@
+const int soundpin=A0;
+const int threshold=47;
+
+void setup(){
+  Serial.begin(9600);
+  pinMode(soundpin,INPUT);
+}
+
+void loop(){
+  int soundsens=analogRead(soundpin);
+
+  int s = soundsens;
+
+  Serial.println(s);
+  delay(100);
+
+  
+  if (soundsens>=threshold){
+    Serial.println("Cry");
+    delay(2000);
+  }
+  else{
+  Serial.println("Normal");
+ }
+}
+
