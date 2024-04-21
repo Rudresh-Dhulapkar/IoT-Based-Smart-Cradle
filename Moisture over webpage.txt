@@ -5,7 +5,7 @@
 const char* ssid = "name";
 const char* password = "password";
  
-ESP8266WebServer server(80);   //instantiate server at port 80 (http port)
+ESP8266WebServer server(8);   //instantiate server at port 80 (http port)
  
 String page = "";
 double data; 
